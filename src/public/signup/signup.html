@@ -1,0 +1,107 @@
+<div class="container text-center">
+  <div class="row">
+    <h1>Sign up for the <strong>Newsletter</strong></h1>
+  </div>
+  <div class="row">
+    <form name='signupForm' novalidate>
+      <div class="form-group">
+        <label for="fname">First Name: </label>
+        <input type="text"
+               class="form-control"
+               id="fname"
+               name="fname"
+               ng-model="signUpCtrl.user.fname"
+               required
+               minlength="3"
+               ng-maxlength="20">
+        <span ng-if="(signupForm.fname.$error.required ) &&
+                      signupForm.fname.$touched">
+					First name is required
+			  </span>
+				<span ng-if="(signupForm.fname.$error.minlength) &&
+                      signupForm.fname.$touched">
+					First name should be at least 3 characters long
+        </span>
+      </div>
+      <div class="form-group">
+        <label for="lname">Last Name: </label>
+        <input type="text"
+               name="lname"
+               class="form-control"
+               id="lname"
+               ng-model="signUpCtrl.user.lname"
+               required
+               minlength="3"
+               ng-maxlength="20">
+        <span ng-if="(signupForm.lname.$error.required ) &&
+                      signupForm.lname.$touched">
+ 					First name is required
+ 			  </span>
+ 				<span ng-if="(signupForm.lname.$error.minlength) &&
+                      signupForm.lname.$touched">
+ 					First name should be at least 3 characters long
+        </span>
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address:</label>
+        <input type="email"
+               name="email"
+               class="form-control"
+               id="email"
+               ng-model="signUpCtrl.user.email"
+               required>
+        <span ng-if="signupForm.email.$invalid &&
+                     signupForm.email.$touched">
+          Must be a valid email address!
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Phone Number:</label>
+        <input type="text"
+               name="phone"
+               class="form-control"
+               id="phone"
+               placeholder="123-456-7890"
+               ng-model="signUpCtrl.user.phone"
+               pattern="(\d{3})-(\d{3})-(\d{4})"
+               required>
+        <span ng-if="(signupForm.phone.$invalid ||
+                      signupForm.phone.$error.required) &&
+                      signupForm.phone.$touched">
+          Phone format must be valid
+        </span>
+      </div>
+      <div class="form-group">
+        <label for="favorite-dish">Favorite Dish:</label>
+        <input type="text"
+               name="favorite-dish"
+               class="form-control"
+               id="favorite-dish"
+               placeholder="SR"
+               ng-model="signUpCtrl.user.favoriteDish"
+               required
+               minlength="2"
+               maxlength="4">
+      <span ng-if="(signupForm.favorite-dish.$error.minlength ||
+                    signupForm.favorite-dish.$error.maxlength ||
+                    signupForm.favorite-dish.$error.required ) &&
+                    signupForm.favorite-dish.$touched">
+        Favorite must be between 2 and 4 characters!
+      </span>
+      <span class="error"
+            ng-if="signUpCtrl.invalidDish(signupForm.favorite-dish)">
+        No such menu number exists
+      </span>
+      </div>
+      <button
+        ng-disabled="signupForm.$invalid"
+        ng-click="signUpCtrl.save()"
+        class="btn btn-lg btn-success">Submit</button>
+      <br>
+      <span ng-if="signUpCtrl.success">
+        {{signUpCtrl.success}}
+      </span>
+    </form>
+  </div>
+</div>
