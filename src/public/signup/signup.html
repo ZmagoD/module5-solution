@@ -73,29 +73,29 @@
         </span>
       </div>
       <div class="form-group">
-        <label for="favorite-dish">Favorite Dish:</label>
+        <label for="favoriteDish">Favorite Dish:</label>
         <input type="text"
-               name="favorite-dish"
+               name="favoriteDish"
                class="form-control"
-               id="favorite-dish"
+               id="favoriteDish"
                placeholder="SR"
                ng-model="signUpCtrl.user.favoriteDish"
+               ng-blur="signUpCtrl.invalidDish($ctrl.user.favoriteDish)"
                required
                minlength="2"
                maxlength="4">
-      <span ng-if="(signupForm.favorite-dish.$error.minlength ||
-                    signupForm.favorite-dish.$error.maxlength ||
-                    signupForm.favorite-dish.$error.required ) &&
-                    signupForm.favorite-dish.$touched">
+      <span ng-if="(signupForm.favoriteDish.$error.minlength ||
+                    signupForm.favoriteDish.$error.maxlength ||
+                    signupForm.favoriteDish.$error.required ) &&
+                    signupForm.favoriteDish.$touched">
         Favorite must be between 2 and 4 characters!
       </span>
-      <span class="error"
-            ng-if="signUpCtrl.invalidDish(signupForm.favorite-dish)">
+      <span ng-if="!signUpCtrl.dishValid">
         No such menu number exists
       </span>
       </div>
       <button
-        ng-disabled="signupForm.$invalid"
+        ng-disabled="signupForm.$invalid && signUpCtrl.dishValid"
         ng-click="signUpCtrl.save()"
         class="btn btn-lg btn-success">Submit</button>
       <br>
